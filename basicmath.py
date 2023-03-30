@@ -2,37 +2,37 @@
 import mpmath
 
 # THis module has basic math functions like addition, subtraction, multiplication, division, modulus, 
-# trig functions including sin, cos, tan, constants like e, pi, exponentials, square, cube,  inverse, root,
-# cube root,logarithms and natural logs.
+# trig functions including sin, cos, tan, sec, csc, cot, constants like e, pi, exponentials, square, 
+# cube,  inverse, root, cube root, logarithms and natural logs.
 
 pi=3.14159265359
 e=2.71828182845
 
-
+# Adds a and b
 def add(a, b, digits=12):
         mpmath.mp.dps=digits
         return (mpmath.mpf(a)+mpmath.mpf(b))
 
-
+# Subtracts b from a
 def subtract(a, b, digits=12):
         mpmath.mp.dps=digits
         return (mpmath.mpf(a)-mpmath.mpf(b))
 
-
+# Multiplies a and b
 def multiply(a, b, digits=12):
         mpmath.mp.dps=digits
         return (mpmath.mpf(a)*mpmath.mpf(b))
 
-
+# Divides a by b
 def divide(a, b, digits=12):
         mpmath.mp.dps=digits
         return (mpmath.mpf(a)/mpmath.mpf(b))
 
-
+# Returns a mod b
 def mod(a, b):
         return (a%b)
 
-
+#Calculates pi to a given number of digits with a given number of iterations 
 def piCalc(iterations=10, digits=12):
         mpmath.mp.dps = digits
         piP = mpmath.mpf(0)
@@ -47,7 +47,7 @@ def piCalc(iterations=10, digits=12):
         
         return piP
 
-
+# Calculates the factorial of a number
 def factorial(a):
         factorial=1
         for n in range(1, a+1):
@@ -55,6 +55,7 @@ def factorial(a):
         
         return factorial
 
+#Calculates e to a given number of digits with a given number of iterations 
 def eCalc(iterations=20, digits=12):
         mpmath.mp.dps=digits
         term=mpmath.mpf(0)
@@ -64,6 +65,7 @@ def eCalc(iterations=20, digits=12):
         eP=term
         return eP
 
+# Converts from degrees to radians
 def degToRad(degree, digits=12, iterations=10):
         mpmath.mp.dps=digits
         piC=piCalc(iterations, digits)
@@ -71,6 +73,7 @@ def degToRad(degree, digits=12, iterations=10):
 
         return rads
 
+# Converts an angle so that it lies between 0 and 2 pi radians
 def getToDomain(rad, digits=12, iterations=10):
         mpmath.mp.dps=digits
         radians=mpmath.mpf(rad)
@@ -85,6 +88,7 @@ def getToDomain(rad, digits=12, iterations=10):
         
         return radians
 
+#Calculates the sine of an angle
 def sin(rad, digits=12, iterations=10):
         mpmath.mp.dps=digits
         radians=mpmath.mpf(getToDomain(rad))
@@ -103,7 +107,7 @@ def sin(rad, digits=12, iterations=10):
         return sin
 
 
-
+#Calculates the cosine of an angle
 def cos(rad, digits=12, iterations=10):
         mpmath.mp.dps=digits
         radians=mpmath.mpf(getToDomain(rad))
@@ -121,7 +125,7 @@ def cos(rad, digits=12, iterations=10):
         
         return cos
 
-
+#Calculates the tangent of an angle
 def tan(rad, digits=12, iterations=20):
         mpmath.mp.dps=digits
         radians=mpmath.mpf(getToDomain(rad))
@@ -129,6 +133,19 @@ def tan(rad, digits=12, iterations=20):
 
         return tan
 
+#Calculates the cosecant of an angle
+def csc(rad, digits=12, iterations=20):
+        return (mpmath.mpf(1/sin(rad, digits, iterations)))
+
+#Calculates the secant of an angle
+def sec(rad, digits=12, iterations=20):
+        return (mpmath.mpf(1/cos(rad, digits, iterations)))
+
+#Calculates the cotangent of an angle
+def cot(rad, digits=12, iterations=20):
+        return (mpmath.mpf(1/tan(rad, digits, iterations)))
+
+#Calculates the exponential of a number (e to the power of the number)
 def exp(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         ex=mpmath.mpf(0)
@@ -138,6 +155,7 @@ def exp(a, digits=12, iterations=100):
         
         return ex 
 
+#Calculates the  natural logarithm of a number
 def ln(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         ln=mpmath.mpf(0)
@@ -153,7 +171,7 @@ def ln(a, digits=12, iterations=100):
 
         return ln
 
-
+#Calculates ta to the power of b
 def power(a, b, digits=12, iterations=100):
         mpmath.mp.dps=digits
         p=mpmath.mpf(ln(a, digits, iterations)*b)
@@ -168,27 +186,29 @@ def log(a, b, digits=12, iterations=300):
 def log10(a, digits=12, iterations=300):
         return (mpmath.mpf(ln(a, digits, iterations)/ln(10, digits, iterations)))
 
-
+#Calculates the inverse of a number
 def inverse(a, digits=12):
         mpmath.mp.dps=digits
         return(mpmath.mpf(1/a))
 
+#Calculates the square of a number
 def square(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         return power(a, 2, digits, iterations)
 
+#Calculates the square root of a number
 def sqrt(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         return power(a, 0.5, digits, iterations)
 
+#Calculates the cube of a number
 def cube(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         return power(a, 3, digits, iterations)
 
+#Calculates the cube root of a number
 def cbrt(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         athird=mpmath.mpf(1/3)
         return power(a, mpmath.mpf(athird), digits, iterations)
-
-print(inverse(9218))
 
