@@ -33,7 +33,7 @@ def mod(a, b):
         return (a%b)
 
 #Calculates pi to a given number of digits with a given number of iterations 
-def piCalc(iterations=10, digits=12):
+def piCalc(digits=12, iterations=10):
         mpmath.mp.dps = digits
         piP = mpmath.mpf(0)
 
@@ -44,10 +44,10 @@ def piCalc(iterations=10, digits=12):
                 term4 = mpmath.mpf(1) / (mpmath.mpf(8*n+6) * mpmath.power(mpmath.mpf(16), n))
                 iteration = term1 - term2 - term3 - term4
                 piP += iteration
-        
-        return piP
 
-# Calculates the factorial of a number
+                return piP
+        
+# Returns factorial
 def factorial(a):
         factorial=1
         for n in range(1, a+1):
@@ -55,8 +55,23 @@ def factorial(a):
         
         return factorial
 
+# Returns the alternating factorial of a number
+def alternatingFactorial(a, even=True):
+        af=1
+        if (even):
+                af=1
+                for i in range(2, (a-1)*2+1, 2):
+                        af*=i
+                            
+        else:
+                af=1
+                for i in range(1, (a-1)*2+1, 2):
+                         af*=i
+        return af
+
+
 #Calculates e to a given number of digits with a given number of iterations 
-def eCalc(iterations=20, digits=12):
+def eCalc(digits=12, iterations=20):
         mpmath.mp.dps=digits
         term=mpmath.mpf(0)
         for n in range(0, iterations+1):
@@ -155,20 +170,14 @@ def exp(a, digits=12, iterations=100):
         
         return ex 
 
-#Calculates the  natural logarithm of a number
+#Calculates the natural logarith of a number using an improved method
 def ln(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
-        ln=mpmath.mpf(0)
-        x=mpmath.mpf(a)
-        ct=mpmath.mpf((x-1)/(x+1))
-        for i in range(1, 2*iterations, 2):
-                loopTerm=mpmath.mpf(1)
-                for n in range(i):
-                        loopTerm*=mpmath.mpf(ct)
-                loopTerm=mpmath.mpf(loopTerm/i)
-                ln+=loopTerm
-        ln=mpmath.mpf(ln*2)
-
+        ln=mpmath.mpf(a-1)
+        for i in range(1, iterations+1):
+                root=mpmath.mpf(a**(mpmath.mpf(1/(2**i))))
+                term=mpmath.mpf(2/(1+root))
+                ln=mpmath.mpf(ln*term)
         return ln
 
 #Calculates ta to the power of b
@@ -194,7 +203,7 @@ def inverse(a, digits=12):
 #Calculates the square of a number
 def square(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
-        return power(a, 2, digits, iterations)
+        return mpmath.mpf(a)**2
 
 #Calculates the square root of a number
 def sqrt(a, digits=12, iterations=100):
@@ -204,11 +213,10 @@ def sqrt(a, digits=12, iterations=100):
 #Calculates the cube of a number
 def cube(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
-        return power(a, 3, digits, iterations)
+        return mpmath.mpf(a)**3
 
 #Calculates the cube root of a number
 def cbrt(a, digits=12, iterations=100):
         mpmath.mp.dps=digits
         athird=mpmath.mpf(1/3)
         return power(a, mpmath.mpf(athird), digits, iterations)
-
