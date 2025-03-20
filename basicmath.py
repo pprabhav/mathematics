@@ -180,7 +180,7 @@ def ln(a, digits=12, iterations=100):
                 ln=mpmath.mpf(ln*term)
         return ln
 
-#Calculates ta to the power of b
+#Calculates a to the power of b
 def power(a, b, digits=12, iterations=100):
         mpmath.mp.dps=digits
         p=mpmath.mpf(ln(a, digits, iterations)*b)
